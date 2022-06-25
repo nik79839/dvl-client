@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react"
-import { Field } from './Field';
+import  Field  from './Field';
 
-const FieldList = (props) => {
+const FieldList = (props) => { 
 
-    let initialState = {
-        fields: [
-            { name: 'asfsaf', textField: 'fjfhdf' },
-            { name: '23425771', textField: 'dsfsdg' },
-        ]
-    };
-
+    let [fields, setFields] = useState(props.fields) //из пропсов берём  статус и отдаём его в значения
     
+    useEffect(() => {                // "- Закиньте в меня ф-цию которую я выполню когда произайдёт уже отрисовка"
+        setFields(props.fields) //статус засинх теми данными что пришли из пропсов
+    }, [props.fields] ) //если зависимость от props.status изменилась, то синхронизируйся
 
     /*const handleInputChange = (textField,ind) => {
         let updatedList = fields;
@@ -18,15 +15,18 @@ const FieldList = (props) => {
         setFields(updatedList);
         
     }*/
+    //debugger;
 
+    const onFieldChange = (e,key) => {
+        props.onChange(e, key);
+    }
 
         return <div>
             <h2>Lists</h2>
             <div>
                 {
-                    props.fields?.map((field,index) => (
-
-                        <Field name={field.name} textField={field.textField} Mykey={index}  />
+                    fields?.map((field,index) => (
+                        <Field name={field.name} textField={field.textField} Mykey={index} onChange={onFieldChange}  />
                     ))
                 }              
             </div>

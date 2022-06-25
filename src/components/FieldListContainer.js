@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import { compose } from "redux";
-import { getFieldList } from '../redux/verification-reducer';
+import { getFieldList,updateFieldText } from '../redux/verification-reducer';
 import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import  FieldList  from './FieldList';
 
 const FieldListContainer = (props) => {
 
-    let [fields, setFields] = useState()
-    useEffect( () => {
-        let mounted = true;
+    //const dispatch = useDispatch();
+    //let [fields, setFields] = useState(props.fields1);
+    //const [loading, setLoading] = useState(false);
+
+    //const getData = async() => {
+        //await props.getFieldList();
+        //setFields(props.fields1);
+        //debugger;
+    //}
+
+    useEffect(  () => {
         props.getFieldList();
-        if(mounted) {
-        setFields(props.fields1);}
-        console.log(props.fields1);
-        debugger;
-        return () => mounted = false;
-        
+        //console.log(fields);
+        //debugger;     
     },[])
 
-    /*const handleInputChange = (textField,ind) => {
-        let updatedList = fields;
-        updatedList[ind].textField = textField;
-        setFields(updatedList);
-        
-    }*/
+    const onFieldChange = (textField,key) => {
+        updateFieldText(textField,key);
+        //let updatedList = props.fields1;
+        //updatedList[key].textField = textField;
+        //setFields(updatedList);
+        //debugger;        
+    }
 
     return(  
         <div>
-            <FieldList fields={fields}/>
+            <FieldList fields={props.fields1} onChange={onFieldChange}/>
         </div>  )           
 }
 let mapStateToProps = (state) => {
@@ -38,6 +44,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, { getFieldList }))
+    connect(mapStateToProps, { getFieldList,updateFieldText}))
     (FieldListContainer);
 

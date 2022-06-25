@@ -1,11 +1,12 @@
 import { verificationAPI } from "../api/api";
 
 const SET_FIELDLIST = 'SET_FIELDLIST';
+const UPDATE_FIELD_TEXT='UPDATE_FIELD_TEXT';
 
 let initialState = {
     fields: [
-        { name: 'asfsaf', textField: 'fjfhdf' },
-        { name: '23425!!', textField: 'dsfsdg' },
+        { name: '?', textField: '?' },
+        { name: '?!!', textField: '?!' },
     ]
 };
 
@@ -14,7 +15,15 @@ const verificationReducer = (state = initialState, action) => {  //ï¿½ï¿½ï¿½ï¿½ï
         case SET_FIELDLIST:
             return {                                     //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ state'a
                 ...state,
-                fields: action.payload
+                fields: action.fieldList
+            }
+        case UPDATE_FIELD_TEXT:
+            debugger;
+            let updatedList = state.fields;
+            updatedList[action.key].textField = action.textField;
+            return {                                     //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ state'a
+                ...state,
+                fields: updatedList
             }
         default:                                     //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ action ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ state
             return state;
@@ -22,14 +31,22 @@ const verificationReducer = (state = initialState, action) => {  //ï¿½ï¿½ï¿½ï¿½ï
 }
 
 export const setFieldList = (fieldList) => (
-    { type: SET_FIELDLIST, payload: { fieldList } }
+    { type: SET_FIELDLIST,  fieldList  }
 )
+export const setFieldText = (text,key) => ({ type: UPDATE_FIELD_TEXT, text,key })
 
 export const getFieldList = () => {
     return async (dispatch) => {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½-ï¿½ï¿½ï¿½
         let response = await verificationAPI.getProfile()  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½'resolved (ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
-        //let { id, email, login } = response.data.data; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ data'ï¿½  id, email, login ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ isAuth true
         dispatch(setFieldList(response.data));//ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ state ï¿½ï¿½ï¿½ï¿½ï¿½ setAuthUserData        
+    }
+}
+
+export const updateFieldText = (text,key) => {
+    debugger;
+    return (dispatch) => {
+        debugger;
+        dispatch(setFieldText(text,key));
     }
 }
 
