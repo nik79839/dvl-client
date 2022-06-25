@@ -25,7 +25,7 @@ const FieldListContainer = (props) => {
     },[])
 
     const onFieldChange = (textField,key) => {
-        updateFieldText(textField,key);
+        props.updateFieldText(textField,key);
         //let updatedList = props.fields1;
         //updatedList[key].textField = textField;
         //setFields(updatedList);

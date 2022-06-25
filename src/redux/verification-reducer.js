@@ -18,9 +18,8 @@ const verificationReducer = (state = initialState, action) => {  //ï¿½ï¿½ï¿½ï¿½ï
                 fields: action.fieldList
             }
         case UPDATE_FIELD_TEXT:
-            debugger;
             let updatedList = state.fields;
-            updatedList[action.key].textField = action.textField;
+            updatedList[action.key].textField = action.text;
             return {                                     //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ state'a
                 ...state,
                 fields: updatedList
@@ -43,9 +42,7 @@ export const getFieldList = () => {
 }
 
 export const updateFieldText = (text,key) => {
-    debugger;
     return (dispatch) => {
-        debugger;
         dispatch(setFieldText(text,key));
     }
 }
