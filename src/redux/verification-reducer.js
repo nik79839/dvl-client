@@ -10,21 +10,30 @@ let initialState = {
     ]
 };
 
-const verificationReducer = (state = initialState, action) => {  //�������� ��������� ������ state � ������ ��� �� ��������� action
+export const updateObjectArray = (items, itemId, objPropName,newObjProps) => {
+    return items.map(u => {    //.map возвращает новый массив который заменит
+         if (u[objPropName] === itemId) { //если найдёт совподения по такому objPropName из обьекта с таким itemId 
+             return { ...u, ...newObjProps }  // создаст новую копию объекта и заменит старые св-ва
+         }
+         return u; //если id не совподает то возвращаем старый объект
+     })
+ }
+
+const verificationReducer = (state = initialState, action) => { 
     switch (action.type) {
         case SET_FIELDLIST:
-            return {                                     //�� ���������� ����� ����� state'a
+            return {                                     
                 ...state,
                 fields: action.fieldList
             }
         case UPDATE_FIELD_TEXT:
-            let updatedList = state.fields;
+            let updatedList = [...state.fields];
             updatedList[action.key].textField = action.text;
-            return {                                     //�� ���������� ����� ����� state'a
+            return {                                     
                 ...state,
                 fields: updatedList
             }
-        default:                                     //���� �� ������������� �� ������ action ����� ������� state
+        default:                                     
             return state;
     }
 }
@@ -35,9 +44,9 @@ export const setFieldList = (fieldList) => (
 export const setFieldText = (text,key) => ({ type: UPDATE_FIELD_TEXT, text,key })
 
 export const getFieldList = () => {
-    return async (dispatch) => {  //���������� ������ �� ����� ������ � ������������ �-���
-        let response = await verificationAPI.getProfile()  //���������� ���� ������ ��'resolved (����� �����)
-        dispatch(setFieldList(response.data));//� ���������� ���������� ������ � state ����� setAuthUserData        
+    return async (dispatch) => { 
+        let response = await verificationAPI.getProfile()
+        dispatch(setFieldList(response.data));      
     }
 }
 
