@@ -6,7 +6,7 @@ const FieldList = (props) => {
     let initialState = {
         fields: [
             { name: 'asfsaf', textField: 'fjfhdf' },
-            { name: '23425', textField: 'dsfsdg' },
+            { name: '23425771', textField: 'dsfsdg' },
         ]
     };
 

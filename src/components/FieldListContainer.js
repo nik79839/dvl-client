@@ -8,12 +8,16 @@ import  FieldList  from './FieldList';
 const FieldListContainer = (props) => {
 
     let [fields, setFields] = useState()
-
-    useEffect(() => {
+    useEffect( () => {
+        let mounted = true;
         props.getFieldList();
-        //setFields(props.fields1);
-        console.log(fields);
-    })
+        if(mounted) {
+        setFields(props.fields1);}
+        console.log(props.fields1);
+        debugger;
+        return () => mounted = false;
+        
+    },[])
 
     /*const handleInputChange = (textField,ind) => {
         let updatedList = fields;

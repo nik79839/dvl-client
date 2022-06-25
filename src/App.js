@@ -11,8 +11,8 @@ function App() {
       <Provider store={store}>
         <Layout>
             <Routes>
-                <Route exact path='/' component={Verification} />
-                <Route exact path='/fetch' component={FetchData} />
+                <Route exact path='/' element={<Verification/>} />
+                <Route exact path='/fetch' element={<FetchData/>} />
             </Routes>
         </Layout>
       </Provider>

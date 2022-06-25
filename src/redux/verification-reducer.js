@@ -5,18 +5,18 @@ const SET_FIELDLIST = 'SET_FIELDLIST';
 let initialState = {
     fields: [
         { name: 'asfsaf', textField: 'fjfhdf' },
-        { name: '23425', textField: 'dsfsdg' },
+        { name: '23425!!', textField: 'dsfsdg' },
     ]
 };
 
-const verificationReducer = (state = initialState, action) => {  //редьюсер принимает старый state и меняет его на основании action
+const verificationReducer = (state = initialState, action) => {  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ state пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ action
     switch (action.type) {
         case SET_FIELDLIST:
-            return {                                     //мы возвращаем копию всего state'a
+            return {                                     //пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ state'a
                 ...state,
                 fields: action.payload
             }
-        default:                                     //если не соответствует не одному action тогда вернуть state
+        default:                                     //пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ action пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ state
             return state;
     }
 }
@@ -26,10 +26,10 @@ export const setFieldList = (fieldList) => (
 )
 
 export const getFieldList = () => {
-    return async (dispatch) => {  //дожидаться промис мы можем только в ассинхронной ф-ции
-        let response = await verificationAPI.getProfile()  //дожидаемся пока промис за'resolved (будет решен)
-        //let { id, email, login } = response.data.data; // мы берём из data'ы  id, email, login и выставляем флаг isAuth true
-        dispatch(setFieldList(response.data));//и отправляем полученные данные в state через setAuthUserData        
+    return async (dispatch) => {  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ-пїЅпїЅпїЅ
+        let response = await verificationAPI.getProfile()  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ'resolved (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
+        //let { id, email, login } = response.data.data; // пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ data'пїЅ  id, email, login пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ isAuth true
+        dispatch(setFieldList(response.data));//пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ state пїЅпїЅпїЅпїЅпїЅ setAuthUserData        
     }
 }
 
