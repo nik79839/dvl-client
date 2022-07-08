@@ -10,15 +10,6 @@ let initialState = {
     ]
 };
 
-export const updateObjectArray = (items, itemId, objPropName,newObjProps) => {
-    return items.map(u => {    //.map возвращает новый массив который заменит
-         if (u[objPropName] === itemId) { //если найдёт совподения по такому objPropName из обьекта с таким itemId 
-             return { ...u, ...newObjProps }  // создаст новую копию объекта и заменит старые св-ва
-         }
-         return u; //если id не совподает то возвращаем старый объект
-     })
- }
-
 const verificationReducer = (state = initialState, action) => { 
     switch (action.type) {
         case SET_FIELDLIST:
@@ -45,8 +36,14 @@ export const setFieldText = (text,key) => ({ type: UPDATE_FIELD_TEXT, text,key }
 
 export const getFieldList = () => {
     return async (dispatch) => { 
-        let response = await verificationAPI.getProfile()
+        let response = await verificationAPI.getFields();
         dispatch(setFieldList(response.data));      
+    }
+}
+
+export const postFieldList = (fieldList) =>{
+    return async () => { 
+        let response = await verificationAPI.postFields(fieldList);   
     }
 }
 

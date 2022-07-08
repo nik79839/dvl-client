@@ -15,7 +15,7 @@ const FieldList = (props) => {
                     ))
                 }              
             </div>
-            <button onClick={() => alert(props.fields[0].textField)} />
+            <button onClick={props.post}>Отправить/</button>
         </div>; 
 }
 export default FieldList;
